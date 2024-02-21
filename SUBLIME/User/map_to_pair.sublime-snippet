@@ -1,0 +1,16 @@
+<snippet>
+	<content><![CDATA[
+ vector<pair<int,int>> vp;
+
+  for(auto u: mp) {
+    vp.push_back(make_pair(u.first,u.second));
+    }
+
+
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>forautoMap_to_Pair</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

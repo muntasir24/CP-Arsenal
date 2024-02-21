@@ -1,0 +1,9 @@
+<snippet>
+	<content><![CDATA[
+sort(v.rbegin(), v.rend());
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	 <tabTrigger>v sort des</tabTrigger> 
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	 <scope>source.c++</scope> 
+</snippet>
