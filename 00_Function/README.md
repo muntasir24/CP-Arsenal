@@ -33,7 +33,7 @@ d[8] = 4  // Divisors: {1, 2, 4, 8}
 d[9] = 3  // Divisors: {1, 3, 9}
 </pre>
 
-## 3.Sieve of Eratosthenes has a time complexity of O(n log log n), which is efficient for finding all prime numbers up to a given limit n :
+## 3. Sieve of Eratosthenes has a time complexity of O(n log log n), which is efficient for finding all prime numbers up to a given limit n :
 
 ```cpp
 vector<int> sieve_of_eratosthenes(int n) {
@@ -70,7 +70,7 @@ int main(){
     vector<int> primes = sieve_of_eratosthenes(n);
 
 ```
-## Find GCD and LCM
+## 4. Find GCD and LCM :
 ```cpp
 long long gcd(long long int a, long long int b)
 {
