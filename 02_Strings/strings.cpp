@@ -1,4 +1,14 @@
-
+ cin >> s;
+        string good = "1100";
+        int n = s.size();
+        int cnt = 0;
+        for (int i = 0; i <= n - 4; i++)
+        {
+            if (s.substr(i, 4) == good)
+            {
+                cnt++;
+            }
+        }
 // 1. Compare strings without case sensitivity
     string s1 = "Moon", s2 = "moon";
     if (strcasecmp(s1.c_str(), s2.c_str()) == 0)
