@@ -120,7 +120,48 @@ void loop() {
   Serial.print(distance);
   Serial.print(" cm | Flag: ");
   Serial.println(flag ? "true" : "false");
+  
+///set alarm through esp32
+// Check if there is any data available from the ESP32
+  if (Serial.available() > 0) {
+    // Read the hour for Slot 1
+    int slot = Serial.parseInt();
+    
+    // Read the minute for Slot 1
+    int sloth = Serial.parseInt();
+    
+    // Read the hour for Slot 2
+    int slotm = Serial.parseInt();
+    
+    // Read the minute for Slot 2
+  
+    if(slot==1){
+ Serial.print("Received Slot 1: ");
+    Serial.print(sloth);
+    Serial.print(":");
+    Serial.println(slotm);
+hour=sloth;
+minute=slotm;
+    }
+    else if(slot==2){
+  Serial.print("Received Slot 2: ");
+      Serial.print(sloth);
+    Serial.print(":");
+    Serial.println(slotm);
 
+    hour2=sloth;
+minute2=slotm;
+    }
+  
+  }
+
+
+
+
+
+
+
+//end
   
 
   char key = keypad.getKey(); 
@@ -255,7 +296,10 @@ if(key=='*'){
           lcd.print("Opening...");
   lcd.setCursor(0, 1);
   lcd.print("First Box");
-        activateServo(myServo,1);
+       myServo.write(110);
+  delay(5000);      
+  myServo.write(0); 
+  
 break;
        }
         if(key=='2'){
@@ -263,7 +307,11 @@ break;
           lcd.print("Opening...");
   lcd.setCursor(0, 1);
   lcd.print("second Box");
-        activateServo(myServo2,2);
+        //activateServo(myServo2,2);
+      
+    myServo2.write(0); 
+  delay(5000);      
+   myServo2.write(110);  
 break;
        }
         if(key=='0'){
@@ -316,8 +364,8 @@ lcd.clear();
     
     delay(2000); 
     
-   
-    for (int i = 0; i < 40; i++) {
+   int i;
+    for (i = 0; i < 40; i++) {
       lcd.clear();
       digitalWrite(13, HIGH);
   
@@ -339,7 +387,15 @@ if(flag)break;
 
  // delay(2000);  
         
+    
     }
+    if(i==39){
+ Serial.println(911); 
+  Serial.println(11);
+  i=0; 
+
+    }
+
     digitalWrite(13, LOW);   
     alarmTriggered = true; 
     lcd.clear();
@@ -361,8 +417,8 @@ if (minute != now.minute()) {
     
     delay(1000); 
     
-
-    for (int i = 0; i < 40; i++) {
+int i;
+    for ( i = 0; i < 40; i++) {
       lcd.clear();
       digitalWrite(13, HIGH);  
    
@@ -375,11 +431,18 @@ if (minute != now.minute()) {
          bool flag = open(trigPin, echoPin, thresholdDistance);
 
   //Serial.println(flag ? "true" : "false");
-if(flag)break;
+if(flag){
+  break;
+}
 
 
           delay(100);
         
+    }
+     if(i==39){
+ Serial.println(911);  //emergency whatsapp alarm not pressed
+  Serial.println(12); 
+i=0;
     }
      digitalWrite(13, LOW);
     alarmTriggered2 = true; 
@@ -403,6 +466,13 @@ lcd.clear();
     lcd.setCursor(0, 1);
     lcd.print("Slot 1");
 activateServo(myServo,1);
+//  myServo.write(110);
+
+//   delay(5000);      
+//   myServo.write(0); 
+  
+
+
 delay(500); 
 lcd.clear();
 
@@ -417,8 +487,14 @@ else if(flag){
     lcd.setCursor(0, 1);
     lcd.print("Slot 2");
 
-activateServo(myServo2,2);
-    delay(500); 
+//activateServo(myServo2,2);
+
+ myServo2.write(0);
+   
+  delay(5000);      
+  myServo2.write(110); 
+    
+   
 lcd.clear();
 
 }
@@ -485,7 +561,7 @@ int cnt=0;
       cnt++;
       
     }
-    if(cnt==4){
+    if(cnt==2){
       delay(500);
       break;
     }
@@ -497,31 +573,7 @@ int cnt=0;
   delay(500);  
   }
 
-  else if(which==2) {
-
-  servo.write(0); 
-
-int cnt=0;
-  
-  while (1) {
-    bool flag = open(trigPin, echoPin, thresholdDistance);
-       if (flag==0) {
-      cnt++;
-      
-    }
-    if(cnt==4){
-      delay(500);
-      break;
-    }
  
- 
-  }
- servo.write(110);
-
-  delay(1000);  
-
-
-  }
 }
 
 
@@ -556,7 +608,6 @@ int open(int trigPin, int echoPin, float thresholdDistance) {
 
   return flag;
 }
-
 
 
 
